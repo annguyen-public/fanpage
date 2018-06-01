@@ -24,7 +24,7 @@ function getCollectionHottest(collection, skip, count) {
       if(collection == 'intagram'){
         mysort = { like_count: -1 };
       }
-
+	console.log(mysort);
       dbo.collection(collection).find(query).limit(count).skip(skip).sort(mysort).toArray(function(err, result) {
         if (err)
           reject(err);
@@ -47,8 +47,6 @@ function getRandomNum(){
 }
 
 app.get('/updateFanPage', function (req, res) {
-	for(var i = 0; i < 5; i ++)
-	{
 	getCollectionHottest('kpop', getRandomNum(), 1).then(function(result) {
 		var data = {
 			'message' : result[0].title,
@@ -82,7 +80,6 @@ app.get('/updateFanPage', function (req, res) {
 	}, function(err) {
 	    console.log(err);
 	});
-	}
 
 	/*graph.post('464220820690513/photos', data, function(err, res) {
 		console.log(res);
