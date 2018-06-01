@@ -23,8 +23,8 @@ function getCollectionHottest(collection, skip, count) {
       var mysort = { upVoteCount: -1 };
       if(collection == 'intagram'){
         mysort = { like_count: -1 };
+	query = {};
       }
-	console.log(mysort);
       dbo.collection(collection).find(query).limit(count).skip(skip).sort(mysort).toArray(function(err, result) {
         if (err)
           reject(err);
