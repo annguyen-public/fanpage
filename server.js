@@ -43,10 +43,12 @@ function getRandomNum(){
 	var sec = date.getSeconds();
 
 	var randomNum = hour + min + sec;
-	return randomNum%20;
+	return randomNum%200;
 }
 
 app.get('/updateFanPage', function (req, res) {
+	for(var i = 0; i < 5; i ++)
+	{
 	getCollectionHottest('kpop', getRandomNum(), 1).then(function(result) {
 		var data = {
 			'message' : result[0].title,
@@ -58,6 +60,29 @@ app.get('/updateFanPage', function (req, res) {
 	}, function(err) {
 	    console.log(err);
 	});
+	getCollectionHottest('girl', getRandomNum(), 1).then(function(result) {
+		var data = {
+			'message' : result[0].title,
+			'url' : result[0].content
+		}
+		graph.post('464220820690513/photos', data, function(err, res) {
+			console.log(res);
+		});
+	}, function(err) {
+	    console.log(err);
+	});
+	getCollectionHottest('intagram', getRandomNum(), 1).then(function(result) {
+		var data = {
+			'message' : result[0].title,
+			'url' : result[0].content
+		}
+		graph.post('464220820690513/photos', data, function(err, res) {
+			console.log(res);
+		});
+	}, function(err) {
+	    console.log(err);
+	});
+	}
 
 	/*graph.post('464220820690513/photos', data, function(err, res) {
 		console.log(res);
